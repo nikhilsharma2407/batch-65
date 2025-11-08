@@ -2,7 +2,12 @@
 2. `git add <filename>` - eg - git add git.md - add file to staging
 3. `git add .` add all files/directories in current dir to staging.
 4. `git commit -m <commit message>`.
-5. `git restore <filename>`. - restore a deleted file
-6. `git push` - push the changes to remote repo
-7. `git remote add origin <github REPO URL>` - Connecting local repo to remote repo
-8. `git push -u origin master` - do this only once - linking the master or local repo to master of remote repo
+5. `git restore <filename>`.
+6. `git checkout <filename>` `git checkout .` - undo the changes since last staging or commit.
+7. `git checkout -b <branch_name>` - create a new branch
+8. `git checkout <branch_name>` `git switch <branch_name>` - switch to a branch
+9. `git merge <branch_name>` - merge branch into current branch
+10. `git restore <filename>`. - restore a deleted file
+11. `git push` - push the changes to remote repo
+12. `git remote add origin <github REPO URL>` - Connecting local repo to remote repo
+13. `git push -u origin master` - do this only once - linking the master or local repo to master of remote repo
