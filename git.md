@@ -11,3 +11,6 @@
 11. `git push` - push the changes to remote repo
 12. `git remote add origin <github REPO URL>` - Connecting local repo to remote repo
 13. `git push -u origin master` - do this only once - linking the master or local repo to master of remote repo
+14. `git pull` - pull the changes from upstream
+15. `git clone <repo URL>` clones the remote repo to your local pc
+16. 
