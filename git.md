@@ -3,3 +3,4 @@
 3. `git add .` add all files/directories in current dir to staging.
 4. `git commit -m <commit message>`.
 5. `git restore <filename>`.
+6. `git push` - push the changes to remote repo
