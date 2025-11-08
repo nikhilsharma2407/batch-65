@@ -7,3 +7,7 @@
 7. `git checkout -b <branch_name>` - create a new branch
 8. `git checkout <branch_name>` `git switch <branch_name>` - switch to a branch
 9. `git merge <branch_name>` - merge branch into current branch
+10. `git restore <filename>`. - restore a deleted file
+11. `git push` - push the changes to remote repo
+12. `git remote add origin <github REPO URL>` - Connecting local repo to remote repo
+13. `git push -u origin master` - do this only once - linking the master or local repo to master of remote repo
