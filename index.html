@@ -5,15 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intro to HTML</title>
+
+    <style>
+        body {
+            font-size: 1.25rem;
+        }
+        
+        /* #pwd {
+            background-color: yellow;
+        } */
+
+        /* 010 */
+        input[type="password"] {
+            background-color: yellow;
+        }
+        
+        /* 010 */
+        .form-input {
+            background-color: red;
+        }        
+
+        input:hover {
+            background-color: blue;
+        }
+        
+        input:focus {
+            background-color: green;
+        }
+
+        tbody tr:nth-child(3n-2) {
+            background-color: lightgray;
+        }
+
+        div::selection {
+            background-color: unset;
+        }
+        
+    </style>
 </head>
 
 <body>
-    <h1>h1 Tag</h1>
-    <h2>h2 Tag</h2>
-    <h3>h3 Tag</h3>
-    <h4>h4 Tag</h4>
-    <h5>h5 Tag</h5>
-    <h6>h6 Tag</h6>
+    <!-- 48px -->
+    <div style="font-size: 3rem;">
+        <!-- h1 2em - 120px>  -->
+        <h1>h1 Tag</h1>
+        <h2>h2 Tag</h2>
+        <h3>h3 Tag</h3>
+        <h4>h4 Tag</h4>
+        <h5>h5 Tag</h5>
+        <h6>h6 Tag</h6>
+    </div>
 
     <div>
         Lorem Div - 1
@@ -28,7 +69,7 @@
         </span> quas molestias harum excepturi aliquid.
     </div>
 
-    <p>Para with &lt;lots of whitespace&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next content </p>
+    <p id="p1">Para with &lt;lots of whitespace&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next content </p>
 
     <a href="https://google.com/" target="frame1">Visit Google</a>
 
@@ -49,7 +90,17 @@
                 <td>Table data 2</td>
             </tr>
             <tr>
-                <td rowspan="2">Table data 1</td>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
                 <td>Table data 2</td>
                 <td>Table data 3</td>
             </tr>
@@ -68,11 +119,71 @@
                 <td>Table data 2</td>
                 <td>Table data 3</td>
             </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            <tr>
+                <td>Table data 1</td>
+                <td>Table data 2</td>
+                <td>Table data 3</td>
+            </tr>
+            
         </tbody>
     </table>
 
 
     <iframe name="frame1" src="https://excalidraw.com/" height="500px" width="500px" frameborder="0"></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Vi-nm4RmA2Q?si=wfEsiS-Lx9xK1P6p"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
     <br>
@@ -99,36 +210,54 @@
 
 
     <form tabindex="1">
-        <label  aria-label="" for="name">Name</label>
-        <input tabindex="2" id="name" placeholder="Enter Name" value="abcd">
+        <label aria-label="" for="name">Name</label>
+        <input class="form-input" tabindex="2" id="name" placeholder="Enter Name" value="abcd">
         <br>
         <br>
         <label for="age">Age</label>
         <!-- YYYY-MM-DD -->
-        <input tabindex="3" id="age" type="date" min="2005-01-01" placeholder="Select DOB">
+        <input class="form-input" tabindex="3" id="age" type="date" min="2005-01-01" placeholder="Select DOB">
         <br>
         <br>
         <label for="pwd">Password</label>
-        <input id="pwd" type="password" placeholder="Enter Password">
+        <input class="form-input" id="pwd" type="password" placeholder="Enter Password">
         <br>
         <br>
-        <label for="pwd">Confirm Password</label>
-        <input id="pwd" type="password" placeholder="Enter Password">
+        <label for="pwd2">Confirm Password</label>
+        <input class="form-input" id="pwd2" type="password" placeholder="Enter Password">
         <br>
-        
+
         <label for="m">male</label>
-        <input id="m" type="radio" value="m" name="gender">
+        <input class="form-input" id="m" type="radio" value="m" name="gender">
 
         <label for="f">female</label>
-        <input id="f" type="radio" value="f" name="gender">
+        <input class="form-input" id="f" type="radio" value="f" name="gender">
         <br>
-        <label for="tnc">Accept TnC</label> <input type="checkbox" id="tnc">
+        <label for="tnc">Accept TnC</label> <input class="form-input" type="checkbox" id="tnc">
 
         <label for="">Resume</label>
-        <input type="file" accept=".docx,.pdf">
+        <input class="form-input" type="file" accept=".docx,.pdf">
 
         <span aria-role="button">Click me </span>
     </form>
+
+
+    <section id="sibling-selector">
+        <div id="div-selector">
+            <span>left sibling of p</span>  <!--span A-->
+            <p style="font-size: 20px;">
+                <span style="font-size: 1em;"> <!--span B-->
+                    child of p, font-size parent
+                    <span style="font-size: 2rem;"> <!--span C-->
+                        span within span, my font-size is
+                    </span>
+                </span>
+
+            </p>
+            <span>Right siblings of p SPAN-1</span>
+            <span>Right siblings of p SPAN-2</span>
+        </div>
+    </section>
 
 </body>
 
