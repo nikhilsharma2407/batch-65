@@ -132,23 +132,23 @@ if ({}) {
 NaN; // not a number;
 123 * "a";
 // console.log("🚀 ~ typeof NaN:", typeof NaN)
-console.log("🚀 ~ NaN == NaN:", NaN == NaN);
-console.log("🚀 ~ isNaN(NaN):", isNaN(NaN));
+// console.log("🚀 ~ NaN == NaN:", NaN == NaN);
+// console.log("🚀 ~ isNaN(NaN):", isNaN(NaN));
 // isNaN(NaN)
 
 let someVarAbcd;
 
 const str = "hello";
-console.log("🚀 ~ str[100]:", str[100]);
+// console.log("🚀 ~ str[100]:", str[100]);
 
 function greet(name) {
   console.log("Hello, " + name);
 }
 
-const message = greet("Nikhil");
-console.log("🚀 ~ message:", message);
+// const message = greet("Nikhil");
+// console.log("🚀 ~ message:", message);
 
-console.log("🚀 ~ typeof undefined:", typeof undefined);
+// console.log("🚀 ~ typeof undefined:", typeof undefined);
 
 // null vs undefined
 let loggedInUser = {
@@ -157,4 +157,119 @@ let loggedInUser = {
 };
 
 loggedInUser = {};
-console.log("🚀 ~ typeof null:", typeof null);
+// console.log("🚀 ~ typeof null:", typeof null);
+
+// operators in js
+// arithmetic +, -, *, /, % - modulo operator, ++, --
+// assignment =, +=, -=, *=, /=
+// comparison  ==, ===, !=, !==, >, <, >=, <=
+// logical  &&, ||, !
+// bitwise & , | , ~ , ^ , << , >>
+
+let num = 14;
+// num++; // num = num + 1
+console.log("🚀 ~ num:", num);
+
+// num/=10; // num = num * 10
+
+// == vs ===
+
+// == comparison operator, only compare the value after type coercion
+// "" == false,
+// "1" == 1
+// "0" == false  // true
+// 0 == false // true
+// null == undefined // true
+
+if (++num % 3 === 0 && num++ % 5 === 0) {
+  console.log("divisible by 3 and 5");
+}
+
+switch (true) {
+  case num % 2 == 0:
+    console.log("divisible by 2");
+    break;
+
+  case num % 4 == 0:
+    console.log("divisible by 4");
+    break;
+
+  case num % 8 == 0:
+    console.log("divisible by 8");
+    break;
+  default:
+    console.log("none of the cases met", num);
+    break;
+}
+
+// ternary operator
+
+const age = 18;
+const message =
+  age >= 18 ? "You are eligible to vote" : "You are not eligible to vote";
+console.log("🚀 ~ message:", message);
+
+console.log("🚀 ~ addNumFn(5, 10):", addNumFn(5, 10)); // hoisted
+// console.log("🚀 ~ addNum(5, 10):", addNum(5, 10));
+
+const addNum = (num1, num2) => {
+  return num1 + num2;
+};
+
+addNum(1, 2, 3, 4, 56, 6);
+console.log("🚀 120 ~ addNum(1, 2, 3, 4):", addNum(1, 2, 3, 4));
+
+function addNumFn(num1, num2) {
+  // this execution context
+  // fn declarations are  hoisted
+  return num1 + num2;
+}
+
+// `this` keyword to be discussed with ES6 classes and OOP concepts.
+
+const array = [1, 2, 3, 4, 5];
+
+// array.forEach((val) => console.log(val));
+array.forEach((value, index, array) => {
+  console.log(`Index: ${index}, Value: ${value}`);
+  if (value % 2 === 0) {
+    console.log("even number found, adding null to the array");
+    // array.length = index + 1;
+    return;
+  }
+  if (index === 0) {
+    console.log("1st element");
+  } else if (index === array.length - 1) {
+    console.log("last element");
+  }
+});
+
+const doubleNums = array.map((val) => val * 2);
+console.log("🚀 ~ array:", array);
+console.log("🚀 ~ doubleNums:", doubleNums);
+
+// filter
+const evenNums = array.filter((val) => !(val % 2));
+const oddNums = array.filter((val) => val % 2);
+console.log("🚀 ~ oddNums:", oddNums);
+console.log("🚀 ~ evenNums:", evenNums);
+
+const oddNumSquared = array.filter((val) => val % 2).map((val) => val ** 2);
+
+// reduce
+
+const sum = [1].reduce((prev, curr, index) => {
+  console.log("🚀 ~ index:", index);
+  console.log("🚀 ~ prev:", prev);
+  console.log("🚀 ~ curr:", curr);
+  console.log("🚀 ~ returning prev + curr:", prev + curr);
+  return prev + curr;
+}, 0);
+
+const nestedArray = [[1], [[2]], [3, [4]]]; //
+
+// depth = 1 [1, [2], 3, [4]]
+// depth = 2 [1, 2, 3, 4]
+const flatten = (array) => {};
+const flattenWithDepth = (array, depth) => {};
+const deepCloneArray = () => {};
