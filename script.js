@@ -168,7 +168,7 @@ loggedInUser = {};
 
 let num = 14;
 // num++; // num = num + 1
-console.log("🚀 ~ num:", num);
+// console.log("🚀 ~ num:", num);
 
 // num/=10; // num = num * 10
 
@@ -207,17 +207,17 @@ switch (true) {
 const age = 18;
 const message =
   age >= 18 ? "You are eligible to vote" : "You are not eligible to vote";
-console.log("🚀 ~ message:", message);
+// console.log("🚀 ~ message:", message);
 
-console.log("🚀 ~ addNumFn(5, 10):", addNumFn(5, 10)); // hoisted
+// console.log("🚀 ~ addNumFn(5, 10):", addNumFn(5, 10)); // hoisted
 // console.log("🚀 ~ addNum(5, 10):", addNum(5, 10));
 
-const addNum = (num1, num2) => {
-  return num1 + num2;
-};
+// const addNum = (num1, num2) => {
+//   return num1 + num2;
+// };
 
-addNum(1, 2, 3, 4, 56, 6);
-console.log("🚀 120 ~ addNum(1, 2, 3, 4):", addNum(1, 2, 3, 4));
+// addNum(1, 2, 3, 4, 56, 6);
+// console.log("🚀 120 ~ addNum(1, 2, 3, 4):", addNum(1, 2, 3, 4));
 
 function addNumFn(num1, num2) {
   // this execution context
@@ -245,24 +245,24 @@ array.forEach((value, index, array) => {
 });
 
 const doubleNums = array.map((val) => val * 2);
-console.log("🚀 ~ array:", array);
-console.log("🚀 ~ doubleNums:", doubleNums);
+// console.log("🚀 ~ array:", array);
+// console.log("🚀 ~ doubleNums:", doubleNums);
 
 // filter
 const evenNums = array.filter((val) => !(val % 2));
 const oddNums = array.filter((val) => val % 2);
-console.log("🚀 ~ oddNums:", oddNums);
-console.log("🚀 ~ evenNums:", evenNums);
+// console.log("🚀 ~ oddNums:", oddNums);
+// console.log("🚀 ~ evenNums:", evenNums);
 
 const oddNumSquared = array.filter((val) => val % 2).map((val) => val ** 2);
 
 // reduce
 
 const sum = [1].reduce((prev, curr, index) => {
-  console.log("🚀 ~ index:", index);
-  console.log("🚀 ~ prev:", prev);
-  console.log("🚀 ~ curr:", curr);
-  console.log("🚀 ~ returning prev + curr:", prev + curr);
+  // console.log("🚀 ~ index:", index);
+  // console.log("🚀 ~ prev:", prev);
+  // console.log("🚀 ~ curr:", curr);
+  // console.log("🚀 ~ returning prev + curr:", prev + curr);
   return prev + curr;
 }, 0);
 
@@ -270,6 +270,112 @@ const nestedArray = [[1], [[2]], [3, [4]]]; //
 
 // depth = 1 [1, [2], 3, [4]]
 // depth = 2 [1, 2, 3, 4]
-const flatten = (array) => {};
+// const flatten = (array) => {
+
+// };
 const flattenWithDepth = (array, depth) => {};
-const deepCloneArray = () => {};
+
+// rest operator, spread operator
+
+// destructring assignment
+const nums = [1, 2, 3, 4, 5];
+// const [, , , , , elem] = nums;
+// console.log("🚀 ~ elem:", elem);
+// console.log("🚀 ~ num1, num2:", num1, num2);
+
+const [num1, num2, ...rest] = nums;
+
+// console.log("🚀 ~ rest:", rest);
+
+const addNums = (num1, num2, ...nums) => {
+  // return nums.reduce((acc, curr) => acc + curr);
+};
+
+const fn = (num1, num2 = 0) => {
+  // console.log("🚀 ~ fn ~ num2:", num2);
+  // console.log("🚀 ~ fn ~ num1:", num1);
+};
+fn(4);
+
+// spread operator
+const numsRef = nums;
+const copyArray = [...nums]; // [ 1,2,3,4,5 ]
+
+numsRef[0] = 999;
+console.log("🚀 ~ nums:", nums); // [999,2,3,4,5]
+console.log("🚀 ~ copyArray:", copyArray);
+
+nums.push(6); // nums = [999,2,3,4,5,6]
+nums.pop(); // nums = [999,2,3,4,5]
+
+nums.unshift(0); // nums = [0,999,2,3,4,5]  // insert at beginning
+nums.shift(); // nums = [999,2,3,4,5] // remove from beginning
+
+const newArray = nums.slice(0, 3); // index 0 to index 2 last is not included / original array is not modified
+// const deletedItems = nums.splice(2);
+
+// insert 1000 after 3,
+nums.splice(3, 0, 1000);
+console.log("🚀 ~ nums:", nums);
+
+// console.log("🚀 ~ nums:", nums);
+// console.log("🚀 ~ deletedItems:", deletedItems);
+// Math.max(...nums)
+// console.log("🚀 ~ Math.max(...nums):", Math.max(...nums))
+
+// const makeRequest = (url, method = "GET") => {};
+
+// makeRequest("http://someurl");
+// makeRequest("http://someurl", "POST");
+// makeRequest("http://someurl", "DELETE");
+// makeRequest("http://someurl", "PUT");
+
+const employee = {
+  empId: " E101",
+  address: {
+    street: "123 Main St",
+    city: "Metropolis",
+    zip: "12345",
+  },
+  name: "emp1",
+  dept: {
+    deptName: "Engineering",
+    deptId: "D101",
+  },
+};
+
+Object.keys(employee);
+console.log("🚀 ~ Object.keys(employee):", Object.keys(employee));
+Object.values(employee);
+console.log("🚀 ~ Object.values(employee):", Object.values(employee));
+Object.entries(employee);
+console.log("🚀 ~ Object.entries(employee):", Object.entries(employee));
+
+for (let key in employee) {
+  console.log("🚀 ~ key:", key);
+}
+
+Object.entries(employee).forEach(([key, val]) => {
+  console.log("🚀 ~ key:", key);
+  console.log("🚀 ~ val:", val);
+});
+
+// const name = employee.name;
+// const empId = employee.empId;
+const { name } = employee;
+
+// const empName = employee.name;
+const { name: empName } = employee; //rename a variable while destructing assignment
+
+// const { dept } = employee;
+// const { deptName } = dept;
+
+// const { dept: { deptName } = {} } = employee || {};
+// console.log("🚀 ~ deptName:", deptName)
+
+const { deptName } = null?.dept || {};
+
+const emp2 = { ...employee };
+
+// deepClone = ()=>{};
+// optional chaining
