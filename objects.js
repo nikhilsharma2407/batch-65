@@ -96,3 +96,5 @@ emp123.greet();
 emp123.greetMethod();
 console.log("🚀 ~ typeof Employee:", typeof Employee);
 console.log("🚀 ~ emp123 instanceof Employee:", emp123 instanceof Employee)
+
+
