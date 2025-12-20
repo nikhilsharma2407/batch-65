@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import FunctionalComponent from './FunctionalComponent';
+import Products from './Products';
 
 function App() {
   const name = 'GfG';
@@ -7,8 +8,11 @@ function App() {
 
   return (
     <>
-      {showComponent ? <FunctionalComponent name={name} showComponent={showComponent} /> : null}
-      <button onClick={() => setShowComponent(!showComponent)}>{showComponent ? 'Hide' : 'Show'} Component</button>
+      {/* {showComponent ? <FunctionalComponent name={name} showComponent={showComponent} /> : null}
+      <button onClick={() => setShowComponent(!showComponent)}>{showComponent ? 'Hide' : 'Show'} Component</button> */}
+
+      <Products />
+      {/* <FunctionalComponent/> */}
     </>
   )
 }

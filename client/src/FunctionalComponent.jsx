@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap';
 
 const FunctionalComponent = ({ name, showComponent }) => {
   console.log("🚀 ~ FunctionalComponent ~ render:");
@@ -41,9 +42,16 @@ const FunctionalComponent = ({ name, showComponent }) => {
 
   return (
     <>
-      <h1>FunctionalComponent</h1>
+      {/* <h1>FunctionalComponent</h1>
       <h2>state count - {count}</h2>
-      <button onClick={onClickHandler}>update State</button>
+      <button onClick={onClickHandler}>update State</button> */}
+      <Container fluid>
+        <Row>
+          <Col>
+            col
+          </Col>
+        </Row>
+      </Container>
     </>
   )
 }
