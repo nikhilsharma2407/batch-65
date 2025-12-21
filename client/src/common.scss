@@ -1,0 +1,8 @@
+@mixin flex-item($size: 50px) {
+  display: flex;
+  height: $size;
+  width: $size;
+  border: 1px solid red;
+  align-items: center;
+  justify-content: center;
+}

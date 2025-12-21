@@ -1,0 +1,122 @@
+@import "../common.scss";
+
+.flexbox {
+  display: flex;
+  height: 800px;
+  border: 1px dashed black;
+  flex-direction: row;
+  // flex-wrap: wrap;
+
+  .flex-item {
+    @include flex-item;
+
+    // &:nth-child(odd) {
+    //   flex-grow: 1;
+    // }
+
+    // &:nth-child(even) {
+    //   flex-grow: 3;
+    // }
+    // &:nth-child(3n + 1) {
+    //   background-color: purple;
+    // }
+
+    // &:nth-child(3n + 2) {
+    //   align-self: center;
+    // }
+
+    // &:nth-child(3n) {
+    //   align-self: flex-end;
+    // }
+  }
+}
+
+// .card {
+//   background-color: rgb(45, 97, 66);
+//   border-radius: 8px;
+//   width: 50%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   margin: 100px auto;
+//   box-shadow: 0px 2px 5px 2px #aaaaaa;
+//   padding: 1rem;
+
+//   &__content {
+//     padding: 16px;
+//   }
+
+//   &__title {
+//     font-size: 30px;
+//     font-weight: bold;
+//     margin-bottom: 8px;
+//   }
+
+//   &__button {
+//     background-color: white;
+//     color: black;
+//     border-radius: 4px;
+//     padding: 10px;
+//     text-transform: uppercase;
+//     margin: 10px;
+//     cursor: pointer;
+//     box-shadow: 0px 2px 5px 2px #aaaaaa;
+//     font-weight: bold;
+
+//     &--primary {
+//       background-color: blue;
+//       margin: 10px;
+//       cursor: pointer;
+//     }
+//   }
+// }
+
+// /* The Elements follow the naming convention
+//         mentioned as: .block__element */
+// .card {
+//   background-color: rgb(45, 97, 66);
+//   border-radius: 8px;
+//   width: 50%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   margin: 100px auto;
+//   box-shadow: 0px 2px 5px 2px #aaaaaa;
+//   padding: 1rem;
+// }
+
+// .card__content {
+//   padding: 16px;
+// }
+
+// .card__title {
+//   font-size: 30px;
+//   font-weight: bold;
+//   margin-bottom: 8px;
+// }
+
+// .card__text {
+//   font-size: 20px;
+//   color: gray;
+//   text-align: center;
+// }
+
+// .card__button {
+//   background-color: white;
+//   color: black;
+//   border-radius: 4px;
+//   padding: 10px;
+//   text-transform: uppercase;
+//   margin: 10px;
+//   cursor: pointer;
+//   box-shadow: 0px 2px 5px 2px #aaaaaa;
+//   font-weight: bold;
+// }
+
+// .card__button--primary {
+//   background-color: blue;
+//   margin: 10px;
+//   cursor: pointer;
+// }
