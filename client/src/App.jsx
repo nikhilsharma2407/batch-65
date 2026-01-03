@@ -2,6 +2,8 @@ import { useState } from 'react';
 import FunctionalComponent from './FunctionalComponent';
 import Products from './Products';
 import FlexBox from './FlexBox';
+import Login from './Login';
+import Signup from './Signup';
 
 function App() {
   const name = 'GfG';
@@ -12,8 +14,9 @@ function App() {
       {/* {showComponent ? <FunctionalComponent name={name} showComponent={showComponent} /> : null}
       <button onClick={() => setShowComponent(!showComponent)}>{showComponent ? 'Hide' : 'Show'} Component</button> */}
 
-      <FlexBox />
+      {/* <FlexBox /> */}
       {/* <Products /> */}
+      <Signup />
       {/* <FunctionalComponent/> */}
     </>
   )
