@@ -1,23 +1,24 @@
-import { useState } from 'react';
-import FunctionalComponent from './FunctionalComponent';
-import Products from './Products';
-import FlexBox from './FlexBox';
-import Login from './Login';
-import Signup from './Signup';
+import { Button } from 'react-bootstrap';
+import { Link, Outlet } from 'react-router';
 
 function App() {
-  const name = 'GfG';
-  const [showComponent, setShowComponent] = useState(true);
 
   return (
     <>
-      {/* {showComponent ? <FunctionalComponent name={name} showComponent={showComponent} /> : null}
-      <button onClick={() => setShowComponent(!showComponent)}>{showComponent ? 'Hide' : 'Show'} Component</button> */}
+      <section className='mt-5'>
+        <Link to='signup'>Signup</Link>
+        <br />
+        <Link to='login' replace={true}>Login</Link>
+        <br />
+        <Link to='flex'>Flex</Link>
+        <br />
+        <Link to='routing/m123?keyword=iPhone&capacity=256GB'>Routing</Link>
+        <br />
+        <Link to='parent/child1'>Child1</Link>
+      </section>
 
-      {/* <FlexBox /> */}
-      {/* <Products /> */}
-      <Signup />
-      {/* <FunctionalComponent/> */}
+
+      <Outlet />
     </>
   )
 }

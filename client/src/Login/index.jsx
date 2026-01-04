@@ -1,8 +1,12 @@
 import React from 'react'
 import './style.scss'
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Container, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap'
+import { useLocation } from 'react-router'
 
 const Login = () => {
+    const { state } = useLocation()
+    console.log("🚀 ~ Login ~ state:", state);
+
     return (
         <Container fluid>
             <Row>
