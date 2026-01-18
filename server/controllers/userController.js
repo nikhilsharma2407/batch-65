@@ -1,6 +1,9 @@
 const { genPasswordHash, verifyPassword } = require("../utils/passwordUtil");
 const { errorCreator, responseCreator } = require("../utils/responseHandler");
 const { UserModel, sanitizeUserData } = require("../models/UserModels");
+const { generateToken, verifyToken } = require("../utils/jwtUtils");
+
+const { Request, Response } = require("express");
 
 const signup = async (req, res, next) => {
   try {
@@ -23,6 +26,11 @@ const signup = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
 const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
@@ -35,6 +43,14 @@ const login = async (req, res, next) => {
     if (!isPasswordValid) {
       errorCreator("Invalid Credentials", 401);
     }
+    const token = generateToken(userData);
+
+    // save the token in the cookie
+    res.cookie("authToken", token, {
+      maxAge: 3600_000,
+      httpOnly: true,
+    });
+
     res.send(
       responseCreator(
         `${username} logged in successfully`,
@@ -48,7 +64,45 @@ const login = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+
+const loginWithCookie = async (req, res, next) => {
+  try {
+    const { authToken } = req.cookies;
+    const { username } = verifyToken(authToken);
+    const userdata = await UserModel.findUser(username);
+
+    res.send(
+      responseCreator("Loggedin via cookie", sanitizeUserData(userdata)),
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+
+const logout = async (req, res, next) => {
+  try {
+    res.clearCookie("authToken");
+    res.locals = {};
+    res.send(responseCreator("Logged out successfully"));
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   signup,
   login,
+  loginWithCookie,
+  logout,
 };

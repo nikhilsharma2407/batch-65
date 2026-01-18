@@ -1,4 +1,4 @@
-const responseCreator = (message, data = null) => {
+const responseCreator = (message, data) => {
   return {
     success: true,
     message,

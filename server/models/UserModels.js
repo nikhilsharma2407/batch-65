@@ -22,8 +22,12 @@ const userSchema = new Schema({
   },
   cart: {
     items: [Object],
-    totalQuantity: Number,
-    totalPrice: Schema.Types.Decimal128,
+    totalQuantity: { type: Number, default: 0 },
+    totalPrice: { type: Number, default: 0 },
+  },
+  role: {
+    type: String,
+    default: "user",
   },
 });
 
@@ -47,6 +51,12 @@ userSchema.statics.findUser = async function (username) {
 userSchema.statics.createUserAcc = async function (userdata) {
   const user = await this.create(userdata);
   return user;
+};
+
+userSchema.statics.getCartItems = async function (username) {
+  const user = await this.findOne({ username }, { cart: 1 });
+
+  return user.cart;
 };
 
 const UserModel = mongoose.model("User", userSchema);
