@@ -90,19 +90,19 @@ db.sales.find(
   {
     $or: [{ quantity: { $lt: 5 } }, { price: { $gte: 10 } }],
   },
-  { _id: 0, date: 0 }
+  { _id: 0, date: 0 },
 );
 
 db.sales.find(
   {
     $and: [{ quantity: { $lt: 5 } }, { price: { $gte: 10 } }],
   },
-  { _id: 0, date: 0 }
+  { _id: 0, date: 0 },
 );
 
 db.sales.find(
   { quantity: { $lt: 5 }, price: { $gte: 10 } },
-  { _id: 0, date: 0 }
+  { _id: 0, date: 0 },
 );
 
 // update queries
@@ -111,7 +111,7 @@ db.sales.updateMany(
   { quantity: { $gt: 10 } },
   {
     $inc: { quantity: -10 },
-  }
+  },
 );
 
 db.sales.find({}, { _id: 0, date: 0 });
@@ -122,7 +122,7 @@ db.sales.updateMany(
   { price: { $gte: 10 } },
   {
     $mul: { price: 0.9 },
-  }
+  },
 );
 db.sales.find({}, { _id: 0, date: 0 });
 
@@ -291,7 +291,7 @@ db.users.findOneAndUpdate(
       },
     },
   },
-  { new: true }
+  { new: true },
 );
 
 [product1, product2].reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -318,10 +318,95 @@ db.users.aggregate([
           input: "$cart.items",
           initialValue: 0,
           in: {
-            $add: ["$$value", { $multiply: ["$$this.price", "$$this.quantity"] }],
+            $add: [
+              "$$value",
+              { $multiply: ["$$this.price", "$$this.quantity"] },
+            ],
           },
         },
       },
     },
   },
 ]);
+
+var product1 = {
+  price: 109.95,
+  title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+  id: 1,
+  description:
+    "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+  image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
+  category: "men's clothing",
+  rating: {
+    rate: 3.9,
+    count: 120,
+  },
+};
+var product2 = {
+  id: 2,
+  title: "Mens Casual Premium Slim Fit T-Shirts ",
+  price: 22.3,
+  description:
+    "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+  category: "men's clothing",
+  rating: { rate: 4.1, count: 259 },
+  image:
+    "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_t.png",
+  quantity: 1,
+};
+
+// db.users.findOneAndUpdate(
+//   { username: "test" },
+//   {
+//     $addToSet: {
+//       "cart.items": { ...product2, quantity: 1 },
+//     },
+//     $inc: {
+//       "cart.totalQuantity": 1,
+//       "cart.totalPrice": product2.price,
+//     },
+//   },
+//   { new: true },
+// );
+
+// db.users.findOne({ username: "test","cart.items.id": product1.id });
+
+db.users.aggregate([
+  {
+    $match: {
+      username: "test",
+    },
+  },
+  {
+    $unwind: {
+      path: "$cart.items",
+    },
+  },
+]);
+
+db.users.aggregate([
+  {
+    $match: {
+      username: "test",
+      "cart.items.id": 1,
+    },
+  },
+  {
+    $unwind: {
+      path: "$cart.items",
+    },
+  },
+  {
+    $match: {
+      "cart.items.id": 1,
+    },
+  },
+  {
+    $project: {
+      "cart.items.quantity": true,
+      "cart.items.price": true,
+    },
+  },
+]);
+
+db.users.findOne({ username: "test", "cart.items.id": 1 });

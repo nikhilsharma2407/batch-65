@@ -3,9 +3,9 @@ const { errorCreator } = require("./responseHandler");
 
 const SECRET_KEY = process.env.JWT_SECRET;
 
-const generateToken = (userdata) => {
+const generateToken = (userdata, time='1h') => {
   const { username, role } = userdata;
-  const token = sign({ username, role }, SECRET_KEY, { expiresIn: "1h" });
+  const token = sign({ username, role }, SECRET_KEY, { expiresIn: time });
   return token;
 };
 

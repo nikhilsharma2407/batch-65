@@ -4,18 +4,20 @@ const { UserModel, sanitizeUserData } = require("../models/UserModels");
 const { generateToken, verifyToken } = require("../utils/jwtUtils");
 
 const { Request, Response } = require("express");
+const { generateQRCode, verifyOtp } = require("../utils/totpUtil");
 
 const signup = async (req, res, next) => {
   try {
     const { password, ...userdata } = req.body;
     const passwordHash = await genPasswordHash(password);
     userdata.password = passwordHash;
+    const { qrCode, secret } = await generateQRCode(userdata.username);
+    userdata.secret = secret;
     const data = await UserModel.createUserAcc(userdata);
     if (data) {
-      res.send({
-        success: true,
-        message: `${userdata?.name} signed up successfully`,
-      });
+      res.send(
+        responseCreator(`${userdata?.name} signed up successfully`, qrCode),
+      );
     }
 
     //   pwdUtil -> password hashing
@@ -39,11 +41,11 @@ const login = async (req, res, next) => {
       password,
       passwordHash: userData.password,
     });
-    console.log("🚀 ~ login ~ isPasswordValid:", isPasswordValid);
     if (!isPasswordValid) {
       errorCreator("Invalid Credentials", 401);
     }
-    const token = generateToken(userData);
+
+    const token = generateToken(userData, "10m");
 
     // save the token in the cookie
     res.cookie("authToken", token, {
@@ -100,9 +102,37 @@ const logout = async (req, res, next) => {
   }
 };
 
+const resetPassword = async (req, res, next) => {
+  try {
+    const { username, newPassword, otp } = req.body;
+    const userData = await UserModel.findUser(username);
+    const isOtpValid = verifyOtp(userData.secret, otp);
+
+    if (isOtpValid) {
+      const isPasswordSame = await verifyPassword({
+        password: newPassword,
+        passwordHash: userData.password,
+      });
+      if (isPasswordSame) {
+        errorCreator("New password cannot be same as old password", 401);
+      }
+      const hashedPwd = await genPasswordHash(newPassword);
+      const data = await UserModel.updatePassword(username, hashedPwd);
+      if (data) {
+        res.send(responseCreator("Password reset successfully!!!"));
+      }
+    } else {
+      errorCreator("Invalid OTP", 403);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   signup,
   login,
   loginWithCookie,
   logout,
+  resetPassword,
 };
