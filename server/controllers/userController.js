@@ -45,7 +45,7 @@ const login = async (req, res, next) => {
       errorCreator("Invalid Credentials", 401);
     }
 
-    const token = generateToken(userData, "10m");
+    const token = generateToken(userData);
 
     // save the token in the cookie
     res.cookie("authToken", token, {

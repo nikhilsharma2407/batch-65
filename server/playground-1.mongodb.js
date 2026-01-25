@@ -388,25 +388,24 @@ db.users.aggregate([
   {
     $match: {
       username: "test",
-      "cart.items.id": 1,
     },
   },
-  {
-    $unwind: {
-      path: "$cart.items",
-    },
-  },
-  {
-    $match: {
-      "cart.items.id": 1,
-    },
-  },
-  {
-    $project: {
-      "cart.items.quantity": true,
-      "cart.items.price": true,
-    },
-  },
+  // {
+  //   $unwind: {
+  //     path: "$cart.items",
+  //   },
+  // },
+  // {
+  //   $match: {
+  //     "cart.items.id": 1,
+  //   },
+  // },
+  // {
+  //   $project: {
+  //     "cart.items.quantity": true,
+  //     "cart.items.price": true,
+  //   },
+  // },
 ]);
 
 db.users.findOne({ username: "test", "cart.items.id": 1 });
