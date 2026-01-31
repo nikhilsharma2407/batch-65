@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import './style.scss'
 import { Button, Card, CardBody, CardFooter, CardHeader, Col, Container, FormControl, FormGroup, FormLabel, Row } from 'react-bootstrap'
 import { useLocation } from 'react-router'
-import { axiosInstance, ENDPOINTS } from '../apiUtils'
+import { axiosInstance, ENDPOINTS, REQUEST_TYPES } from '../apiUtils'
+import useApi from '../useApi'
 
 const Login = () => {
     const { state } = useLocation()
     console.log("🚀 ~ Login ~ state:", state);
+    const { makeRequest } = useApi(ENDPOINTS.USER.LOGIN, REQUEST_TYPES.POST)
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -14,8 +16,11 @@ const Login = () => {
 
     const onLogin = async () => {
         const payload = { username, password };
-        const { data } = await axiosInstance.post(ENDPOINTS.USER.LOGIN, payload);
-        console.log("🚀 ~ onLogin ~ data:", data)
+        // const response = await axiosInstance.post(ENDPOINTS.USER.LOGIN, payload);
+        await makeRequest(payload);
+        setPassword('')
+        setUsername('')
+
     }
 
     const isValid = username && password;
@@ -29,12 +34,12 @@ const Login = () => {
                         <CardBody>
                             <FormGroup controlId='username' className='mb-3'>
                                 <FormLabel>Username</FormLabel>
-                                <FormControl onChange={e => setUsername(e.target.value)} placeholder='Enter Username' />
+                                <FormControl value={username} onChange={e => setUsername(e.target.value)} placeholder='Enter Username' />
                             </FormGroup>
 
                             <FormGroup controlId='password' className='mb-3'>
                                 <FormLabel>Password</FormLabel>
-                                <FormControl onChange={e => setPassword(e.target.value)} placeholder='Enter Password' />
+                                <FormControl value={password} type='password' onChange={e => setPassword(e.target.value)} placeholder='Enter Password' />
                             </FormGroup>
 
                         </CardBody>

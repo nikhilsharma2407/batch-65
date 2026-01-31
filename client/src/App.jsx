@@ -1,11 +1,13 @@
 import { Button } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router';
+import MyNavBar from './MyNavBar';
+import Loader from './Loader';
 
 function App() {
 
   return (
     <>
-      <section className='mt-5'>
+      {/* <section className='mt-5'>
         <Link to='signup'>Signup</Link>
         <br />
         <Link to='login' replace={true}>Login</Link>
@@ -15,7 +17,10 @@ function App() {
         <Link to='routing/m123?keyword=iPhone&capacity=256GB'>Routing</Link>
         <br />
         <Link to='parent/child1'>Child1</Link>
-      </section>
+      </section> */}
+
+      <MyNavBar />
+      <Loader />
 
 
       <Outlet />

@@ -19,7 +19,8 @@ export const Child3 = () => {
     )
 }
 
-const Parent = () => {
+const Parent = ({children}) => {
+    console.log("🚀 ~ Parent ~ children:", children)
     // relative vs absolute paths
     return (
         <>

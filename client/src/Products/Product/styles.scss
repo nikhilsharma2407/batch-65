@@ -1,0 +1,39 @@
+@import "../../common.scss";
+
+.product-card {
+  &:hover {
+    cursor: pointer;
+    @include card-shadow;
+    transition: ease-in-out 0.3s;
+  }
+
+  .image {
+    height: 250px;
+    object-fit: contain;
+  }
+
+  .title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .content {
+    height: 90px;
+
+    .text {
+      font-size: 13px;
+      color: gray;
+    }
+
+    .price {
+      font-weight: bolder;
+    }
+
+    .description {
+      overflow: hidden;
+      height: 60px;
+      text-overflow: ellipsis;
+    }
+  }
+}
