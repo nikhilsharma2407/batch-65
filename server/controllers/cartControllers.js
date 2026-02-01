@@ -41,10 +41,10 @@ const decrement = async (req, res, next) => {
 
 const removeFromCart = async (req, res, next) => {
   const { username } = res.locals.userdata;
-  const product = req.body;
-  const data = await UserModel.removeFromCart(username, product);
+  const { id, title } = req.query;
+  const data = await UserModel.removeFromCart(username, parseInt(id));
 
-  res.send(responseCreator(`${product.title} removed from cart`, data));
+  res.send(responseCreator(`${title} removed from cart`, data));
 };
 
 module.exports = {

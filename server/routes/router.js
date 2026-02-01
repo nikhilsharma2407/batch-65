@@ -29,5 +29,10 @@ router.post("/test/:id", (req, res) => {
 router.post("/signup", signup);
 router.post("/login", login);
 
+router.all('/*splat', (req,res)=>{
+  res.status(404);
+  res.send('Invalid path')
+})
+
 // export default router;
 module.exports = router;

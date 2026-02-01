@@ -4,6 +4,7 @@ import Orders from "./Orders";
 import Parent, { Child1, Child2, Child3 } from "./Parent";
 import Products from "./Products";
 import ProtectedRoute from "./ProtectedRoute";
+import Counter from "./reducers/Counter";
 import Routing from "./Routing";
 import Signup from "./Signup";
 import UserCart from "./UserCart";
@@ -47,6 +48,10 @@ const routes = [
     {
         path: 'login',
         element: <Login />
+    },
+    {
+        path: 'counter',
+        element: <Counter />
     },
     {
         path: 'user',

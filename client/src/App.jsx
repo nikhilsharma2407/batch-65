@@ -2,8 +2,27 @@ import { Button } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router';
 import MyNavBar from './MyNavBar';
 import Loader from './Loader';
+import { useContext, useEffect } from 'react';
+import useApi from './useApi';
+import { ENDPOINTS } from './apiUtils';
+import { UserContext } from './UserContextProvider';
+import MyToast from './MyToast';
+import { useDispatch, useSelector } from 'react-redux';
+import { ACTIONS } from './reducers/countReducer';
 
 function App() {
+  const { userData } = useContext(UserContext);
+  const { makeRequest: initiateLogin } = useApi(ENDPOINTS.USER.LOGIN)
+  const count = useSelector(state => state.count);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!userData) {
+      initiateLogin();
+    }
+  }, [userData])
+
+
 
   return (
     <>
@@ -21,7 +40,11 @@ function App() {
 
       <MyNavBar />
       <Loader />
+      <MyToast />
 
+      <Button onClick={() => dispatch({ type: ACTIONS.INCREMENT, payload: 1 })} variant="primary">App Component</Button>
+
+      <h1>{count}</h1>
 
       <Outlet />
     </>

@@ -6,6 +6,11 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import routes from './routes';
 import UserContextProvider from './UserContextProvider';
+import { applyMiddleware, createStore } from 'redux';
+import countReducer from './reducers/countReducer';
+import logger from 'redux-logger';
+import { thunk } from 'redux-thunk'
+import { Provider } from 'react-redux';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +19,8 @@ const router = createBrowserRouter([
     children: routes
   }
 ]);
+
+const store = createStore(countReducer, applyMiddleware(logger, thunk));
 
 createRoot(document.getElementById('root')).render(
   <>
@@ -33,10 +40,13 @@ createRoot(document.getElementById('root')).render(
       </RouterProvider>
     </UserContext.Provider> */}
 
+
     <UserContextProvider>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <Provider store={store}>
+        <RouterProvider router={router}>
+          <App />
+        </RouterProvider>
+      </Provider>
     </UserContextProvider>
   </>
 )

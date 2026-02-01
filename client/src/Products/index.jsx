@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Product from './Product';
+import ProductCard from './ProductCard';
 import { Container, Row } from 'react-bootstrap';
 
 const Products = () => {
@@ -25,7 +25,7 @@ const Products = () => {
   return (
     <Container fluid>
       <Row>
-        {products.map(product => <Product product={product} />)}
+        {products.map(product => <ProductCard product={product} />)}
       </Row>
     </Container>
   )

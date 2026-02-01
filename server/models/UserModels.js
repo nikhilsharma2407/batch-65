@@ -137,7 +137,7 @@ userSchema.statics.increment = async function (username, product) {
   return sanitizeUserData(user, "cart");
 };
 
-userSchema.statics.removeFromCart = async function (username, product) {
+userSchema.statics.removeFromCart = async function (username, productId) {
   const userData = await this.aggregate([
     {
       $match: {
@@ -151,7 +151,7 @@ userSchema.statics.removeFromCart = async function (username, product) {
     },
     {
       $match: {
-        "cart.items.id": product.id,
+        "cart.items.id": productId,
       },
     },
     {
@@ -170,7 +170,7 @@ userSchema.statics.removeFromCart = async function (username, product) {
     { username},
     {
       $pull: {
-        "cart.items": { id: product.id },
+        "cart.items": { id: productId },
       },
       $inc: {
         "cart.totalQuantity": -cart.items?.quantity,
@@ -187,7 +187,7 @@ userSchema.statics.decrement = async function (username, product) {
   const productInCart = user.cart.items.find(({ id }) => product.id === id);
   if (productInCart?.quantity === 1) {
     console.log("🚀 ~ productInCart:", productInCart);
-    return this.removeFromCart(username, product);
+    return this.removeFromCart(username, product.id);
   }
   const userData = await this.findOneAndUpdate(
     { username, "cart.items.id": product.id },

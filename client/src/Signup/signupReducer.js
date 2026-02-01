@@ -1,63 +1,75 @@
-export const ACTIONS = {
-  NAME_CHANGE: "NAME_CHANGE",
-  USERNAME_CHANGE: "USERNAME_CHANGE",
-  EMAIL_CHANGE: "EMAIL_CHANGE",
-  PASSWORD_CHANGE: "PASSWORD_CHANGE",
+export const ACTION_TYPES = {
+  NAME: "name",
+  USERNAME: "username",
+  EMAIL: "email",
+  PASSWORD: "password",
 };
 
 export const initialState = {
-  name: { value: "", isValid: false },
-  username: { value: "", isValid: false },
-  email: { value: "", isValid: false },
+  name: {
+    value: null,
+    isValid: null,
+  },
+  username: {
+    value: null,
+    isValid: null,
+  },
+  email: {
+    value: null,
+    isValid: null,
+  },
   password: {
-    value: "",
-    validations: {
-      hasLowercase: false,
-      hasUppercase: false,
-      hasNumber: false,
-      hasSpecialChar: false,
-      minLength: false,
+    value: null,
+    validation: {
+      hasLowerCase: null,
+      hasUpperCase: null,
+      hasNumber: null,
+      hasSpecialCharacter: null,
+      meetsMinChReq: null,
     },
   },
 };
 
-const NAME_PATTERN = /^[a-zA-Z\s]{3,}$/;
-const USERNAME_PATTERN = /^[a-zA-Z0-9_]{3,}$/;
-const EMAIL_PATTERN =
-  /^(?<username>[a-z]\w+\.?\w+)@(?<domain>[a-z]{2,15})\.(?<tld>[a-z]{2,3})$/;
+const NAME_PATTERN = /^[A-Z][a-z]+$/;
+const EMAIL_PATTERN = /^\w+([.+]\w+)?@[a-z]{3,}\.[a-z]{2,}$/;
+const USERNAME_PATTERN = /^[a-z\d]+$/;
 
-export const signupReducer = (state = initialState, action) => {
-  const { type, payload } = action;
-
+// action -> {type, payload}
+const signupReducer = (state = initialState, action) => {
+  const { type, payload } = action || {};
   switch (type) {
-    case ACTIONS.NAME_CHANGE:
-      const isNameValid = NAME_PATTERN.test(payload);
-      const newState = {
+    case ACTION_TYPES.NAME:
+      // update the state immutabily
+      const copyState = { ...state };
+      copyState.name = { value: payload, isValid: NAME_PATTERN.test(payload) };
+      return copyState;
+    case ACTION_TYPES.USERNAME:
+      return {
         ...state,
-        name: { value: payload, isValid: isNameValid },
+        username: { value: payload, isValid: USERNAME_PATTERN.test(payload) },
       };
-      return newState;
-
-    case ACTIONS.PASSWORD_CHANGE:
-      const password = payload;
-      const hasLowercase = /[a-z]/.test(password);
-      const hasUppercase = /[A-Z]/.test(password);
-      const hasNumber = /\d/.test(password);
-      const hasSpecialChar = /[!@#$%^&*()_+]/.test(password);
-      const minLength = password.length >= 8;
-
+    case ACTION_TYPES.EMAIL:
+      return {
+        ...state,
+        email: { value: payload, isValid: EMAIL_PATTERN.test(payload) },
+      };
+    case ACTION_TYPES.PASSWORD:
       return {
         ...state,
         password: {
-          value: password,
-          validations: {
-            hasLowercase,
-            hasUppercase,
-            hasNumber,
-            hasSpecialChar,
-            minLength,
+          value: payload,
+          validation: {
+            hasLowerCase: /[a-z]/.test(payload),
+            hasUpperCase: /[A-Z]/.test(payload),
+            hasNumber: /\d/.test(payload),
+            hasSpecialCharacter: /[\W_]/.test(payload),
+            meetsMinChReq: payload.length >= 8,
           },
         },
       };
+    default:
+      return state;
   }
 };
+
+export default signupReducer;
