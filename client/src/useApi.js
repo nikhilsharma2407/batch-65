@@ -6,12 +6,13 @@ const useApi = (url, type = REQUEST_TYPES.GET) => {
   const { setUserData, setMessage, setSuccess, isLoading, setIsLoading } =
     useContext(UserContext);
 
-    const [responseData, setResponseData] = useState(null);
+  const [responseData, setResponseData] = useState(null);
 
   const makeRequest = async (
     payload,
-    { updateCart = false, updateUser = true },
+    options = { updateCart: false, updateUser: true, logout: false },
   ) => {
+    const { updateCart, updateUser, logout } = options;
     try {
       setIsLoading(true);
       setMessage(null);
@@ -26,6 +27,8 @@ const useApi = (url, type = REQUEST_TYPES.GET) => {
         setUserData((userData) => ({ ...userData, cart: data }));
       } else if (updateUser) {
         setUserData(data);
+      } else if (logout) {
+        setUserData(null);
       } else {
         setResponseData(data);
       }

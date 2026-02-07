@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, Outlet, useLocation } from 'react-router'
+import useIsLoggedIn from './useIsLoggedIn';
 
 const ProtectedRoute = () => {
 
   const { pathname } = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(null) // hardcoded for now
+  const isLoggedIn = useIsLoggedIn();
   const [navigateToLogin, setNavigateToLogin] = useState(null);
 
   useEffect(() => {

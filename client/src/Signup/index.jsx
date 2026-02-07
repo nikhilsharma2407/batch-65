@@ -3,8 +3,15 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Col, Container, Floatin
 import './styles.scss';
 import signupReducer, { ACTION_TYPES, initialState } from './signupReducer';
 import { Eye, EyeSlash } from 'react-bootstrap-icons';
+import useApi from '../useApi';
+import { ENDPOINTS, REQUEST_TYPES } from '../apiUtils';
+import TwoFactorAuthSetup from './TwoFactorAuthSetup';
 
 const Signup = () => {
+  const [showTwoFactorSetup, setShowTwoFactorSetup] = useState(false);
+  const handleClose = () => setShowTwoFactorSetup(false);
+
+  const { responseData: qrCode, makeRequest } = useApi(ENDPOINTS.USER.Signup, REQUEST_TYPES.POST)
   const [state, dispatch] = useReducer(signupReducer, initialState);
   const { name, email, username, password } = state;
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -20,7 +27,22 @@ const Signup = () => {
     dispatch({ type: e.target.name, payload: e.target.value })
   }
 
+  const onSubmit = () => {
+    const payload = {}
+    // prepare the payload by iterating the state object and extracting the value of each field
+    Object.entries(state).forEach(([key, val]) => {
+      payload[key] = val.value;
+    })
 
+    makeRequest(payload, { updateUser: false });
+    dispatch({ type: ACTION_TYPES.RESET });
+  }
+
+  useEffect(() => {
+    if (qrCode) {
+      setShowTwoFactorSetup(true);
+    }
+  }, [qrCode])
 
   const isFormValid = name.isValid && username.isValid && email.isValid && isPasswordValid;
 
@@ -67,11 +89,12 @@ const Signup = () => {
 
             </CardBody>
             <CardFooter className='d-flex justify-content-center'>
-              <Button variant='outline-primary' disabled={!isFormValid}>Signup</Button>
+              <Button variant='outline-primary' onClick={onSubmit} disabled={!isFormValid}>Signup</Button>
             </CardFooter>
           </Card>
         </Col>
       </Row>
+      <TwoFactorAuthSetup handleClose={handleClose} show={showTwoFactorSetup} qrCode={qrCode} />
     </Container >
   )
 }

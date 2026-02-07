@@ -3,6 +3,7 @@ export const ACTION_TYPES = {
   USERNAME: "username",
   EMAIL: "email",
   PASSWORD: "password",
+  RESET: "reset",
 };
 
 export const initialState = {
@@ -67,6 +68,8 @@ const signupReducer = (state = initialState, action) => {
           },
         },
       };
+    case ACTION_TYPES.RESET:
+      return initialState;
     default:
       return state;
   }

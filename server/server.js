@@ -13,6 +13,7 @@ const {
 const { responseCreator } = require("./utils/responseHandler");
 const app = express();
 const cors = require("cors");
+const path = require("path");
 // Middlewares, imtermediate request handlers
 
 app.use(
@@ -31,6 +32,8 @@ app.use("/cart", authController, cartRouter);
 app.use("/admin", authController, adminController, (req, res, next) => {
   res.send(responseCreator("admin route"));
 });
+
+app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(errorHandler);
 

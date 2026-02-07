@@ -10,7 +10,7 @@ export const ENDPOINTS = {
     LOGIN: "/user/login",
     Signup: "/user/signup",
     LOGOUT: "/user/logout",
-    RESET_PASSWORD: "/user/reset_password",
+    RESET_PASSWORD: "/user/reset-password",
   },
   CART: {
     ADD_TO_CART: "/cart/add-to-cart",

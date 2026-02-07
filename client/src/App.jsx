@@ -17,10 +17,9 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!userData) {
-      initiateLogin();
-    }
-  }, [userData])
+    initiateLogin();
+    // check the localstore key then redirect
+  }, [])
 
 
 

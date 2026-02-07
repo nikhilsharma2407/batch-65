@@ -11,7 +11,6 @@ import { UserContext } from '../../UserContextProvider';
 
 const ProductCard = ({ product }) => {
     const { userData, isLoading } = useContext(UserContext);
-    console.log("🚀 ~ ProductCard ~ userData:", userData)
 
     const navigate = useNavigate();
     const { pathname } = useLocation()

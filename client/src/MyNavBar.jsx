@@ -1,3 +1,4 @@
+import { use } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -5,8 +6,17 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router';
+import useIsLoggedIn from './useIsLoggedIn';
+import useApi from './useApi';
+import { ENDPOINTS } from './apiUtils';
 
 const MyNavBar = () => {
+    const isLoggedIn = useIsLoggedIn();
+    const { makeRequest } = useApi(ENDPOINTS.USER.LOGOUT);
+
+    const onLogout = () => {
+        makeRequest(null, { logout: true })
+    }
     return (
         <Navbar expand="md" className="bg-dark text-white mb-2" variant="dark">
             <Container fluid>
@@ -33,8 +43,10 @@ const MyNavBar = () => {
                         </Nav.Link>
                     </Nav>
                     <Nav className='ms-auto'>
-                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                        <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                        {isLoggedIn ? <Nav.Link onClick={onLogout}>Logout</Nav.Link> : <>
+                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                        </>}
                     </Nav>
                     <Form className="d-flex">
                         <Form.Control
