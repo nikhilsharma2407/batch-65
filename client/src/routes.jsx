@@ -1,3 +1,4 @@
+import Cart from "./Cart";
 import FlexBox from "./FlexBox";
 import Login from "./Login";
 import Orders from "./Orders";
@@ -7,7 +8,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import Counter from "./reducers/Counter";
 import Routing from "./Routing";
 import Signup from "./Signup";
-import UserCart from "./UserCart";
 
 const routes = [
     {
@@ -58,7 +58,7 @@ const routes = [
         element: <ProtectedRoute />,
         children: [
             {
-                path: 'cart', element: <UserCart />
+                path: 'cart', element: <Cart />
             },
             {
                 path: 'order', element: <Orders />

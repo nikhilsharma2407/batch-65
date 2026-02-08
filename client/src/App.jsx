@@ -41,9 +41,9 @@ function App() {
       <Loader />
       <MyToast />
 
-      <Button onClick={() => dispatch({ type: ACTIONS.INCREMENT, payload: 1 })} variant="primary">App Component</Button>
+      {/* <Button onClick={() => dispatch({ type: ACTIONS.INCREMENT, payload: 1 })} variant="primary">App Component</Button> */}
 
-      <h1>{count}</h1>
+      {/* <h1>{count}</h1> */}
 
       <Outlet />
     </>

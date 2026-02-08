@@ -14,6 +14,7 @@ const { responseCreator } = require("./utils/responseHandler");
 const app = express();
 const cors = require("cors");
 const path = require("path");
+const stripeRouter = require("./routes/stripeRouter");
 // Middlewares, imtermediate request handlers
 
 app.use(
@@ -29,11 +30,17 @@ app.use(cookieParser());
 app.use("/router", router);
 app.use("/user", userRouter);
 app.use("/cart", authController, cartRouter);
+app.use("/order", authController, stripeRouter);
 app.use("/admin", authController, adminController, (req, res, next) => {
   res.send(responseCreator("admin route"));
 });
 
 app.use(express.static(path.join(__dirname, "dist")));
+
+// regex for accept everything
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "dist/index.html"));
+});
 
 app.use(errorHandler);
 

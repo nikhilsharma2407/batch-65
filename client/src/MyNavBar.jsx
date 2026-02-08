@@ -9,9 +9,15 @@ import { Link } from 'react-router';
 import useIsLoggedIn from './useIsLoggedIn';
 import useApi from './useApi';
 import { ENDPOINTS } from './apiUtils';
+import { Cart } from 'react-bootstrap-icons';
+import { useUserContext } from './UserContextProvider';
+import { Badge } from 'react-bootstrap';
 
 const MyNavBar = () => {
     const isLoggedIn = useIsLoggedIn();
+    const { userData } = useUserContext();
+
+    const cartTotalQuantity = userData?.cart?.totalQuantity
     const { makeRequest } = useApi(ENDPOINTS.USER.LOGOUT);
 
     const onLogout = () => {
@@ -43,7 +49,15 @@ const MyNavBar = () => {
                         </Nav.Link>
                     </Nav>
                     <Nav className='ms-auto'>
-                        {isLoggedIn ? <Nav.Link onClick={onLogout}>Logout</Nav.Link> : <>
+                        {isLoggedIn ? <>
+
+                            <Nav.Link as={Link} to="/user/cart">
+                                <Cart size={25} />
+                                {cartTotalQuantity && <Badge style={{ position: 'relative', top: '-10px', left: '-10px' }} pill>{cartTotalQuantity}</Badge>}
+
+                            </Nav.Link>
+                            <Nav.Link onClick={onLogout}>Logout</Nav.Link>
+                        </> : <>
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>
                             <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
                         </>}

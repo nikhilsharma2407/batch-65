@@ -39,6 +39,7 @@ const userSchema = new Schema(
       default: "user",
     },
     secret: String,
+    orders: [Object],
   },
   {
     toObject: { getters: true },
