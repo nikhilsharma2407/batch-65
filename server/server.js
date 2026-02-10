@@ -35,11 +35,11 @@ app.use("/admin", authController, adminController, (req, res, next) => {
   res.send(responseCreator("admin route"));
 });
 
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // regex for accept everything
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "dist/index.html"));
+  res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 app.use(errorHandler);
