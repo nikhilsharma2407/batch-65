@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -44,7 +44,9 @@ createRoot(document.getElementById('root')).render(
     <UserContextProvider>
       <Provider store={store}>
         <RouterProvider router={router}>
-          <App />
+          {/* <Suspense fallback={()=><h1 style={{position:'fixed', top:'50%'}}>Loading</h1>}> */}
+            <App />
+          {/* </Suspense> */}
         </RouterProvider>
       </Provider>
     </UserContextProvider>

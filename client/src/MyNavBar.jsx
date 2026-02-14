@@ -32,8 +32,9 @@ const MyNavBar = () => {
                     <Nav
                         className="me-auto my-2 my-lg-0"
                     >
-                        <Nav.Link href="#action1">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/routing/123">Routing</Nav.Link>
                         <Nav.Link as={Link} to="/counter">Counter</Nav.Link>
+                        <Nav.Link as={Link} to="/parent">parent</Nav.Link>
                         <NavDropdown title="Link" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">

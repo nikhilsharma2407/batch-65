@@ -1,0 +1,1 @@
+.flexbox{display:flex;height:800px;border:1px dashed black;flex-direction:row}.flexbox .container{background-color:purple}.flexbox .flex-item{display:flex;height:50px;width:50px;border:1px solid red;align-items:center;justify-content:center}

@@ -1,13 +1,24 @@
-import Cart from "./Cart";
-import FlexBox from "./FlexBox";
-import Login from "./Login";
-import Orders from "./Orders";
+import { lazy } from "react";
+const Cart = lazy(() => import("./Cart"));
+const FlexBox = lazy(() => import("./FlexBox"));
+const Login = lazy(() => import("./Login"));
+const Orders = lazy(() => import("./Orders"));
 import Parent, { Child1, Child2, Child3 } from "./Parent";
-import Products from "./Products";
-import ProtectedRoute from "./ProtectedRoute";
-import Counter from "./reducers/Counter";
-import Routing from "./Routing";
-import Signup from "./Signup";
+// const Parent = lazy(() => import('./Parent'));
+
+// const Parent = ParentModule?.default;
+// const Child1 = ParentModule?.Child1;
+// const Child2 = ParentModule?.Child2;
+// const Child3 = ParentModule?.Child3;
+
+const Products = lazy(() => import('./Products'))
+// import Products from "./Products";
+const ProtectedRoute = lazy(() => import("./ProtectedRoute"));
+const Counter = lazy(() => import("./reducers/Counter"));
+const Routing = lazy(() => import("./Routing"));
+const Signup = lazy(() => import("./Signup"));
+
+// const ParentComponent = lazy(()=>import('./Parent'))
 
 const routes = [
     {
