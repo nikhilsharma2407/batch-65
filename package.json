@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "npm --prefix client install && npm --prefix client run build && rm -rf server/public && cp -r client/dist server/public && npm --prefix server install",
+    "build": "npm --prefix client install && npm --prefix client run build && rm -rf server/public && mv client/dist server/public && npm --prefix server install",
     "start": "npm --prefix server start"
   }
 }
