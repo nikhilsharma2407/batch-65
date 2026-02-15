@@ -27,7 +27,7 @@ stripeRouter.post("/create-checkout-session", async (req, res, next) => {
         quantity: product.quantity,
       };
     });
-    console.log("🚀 ~ lineItems:", lineItems)
+    console.log("🚀 ~ lineItems:", lineItems);
 
     const session = await stripe.checkout.sessions.create({
       success_url: `${process.env.CLIENT_URL}/checkout?session_id={CHECKOUT_SESSION_ID}`,
@@ -36,9 +36,14 @@ stripeRouter.post("/create-checkout-session", async (req, res, next) => {
       payment_method_types: ["card"],
       mode: "payment",
     });
-    console.log("🚀 ~ session:", session)
+    console.log("🚀 ~ session:", session);
 
-    res.send({ id: session.id });
+    res.send(
+      responseCreator("Checkout session created", {
+        url: session.url,
+        id: session.id,
+      }),
+    );
   } catch (error) {
     next(error);
   }

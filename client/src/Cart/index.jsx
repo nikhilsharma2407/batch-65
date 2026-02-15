@@ -1,26 +1,46 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import useApi from '../useApi'
 import { Card, CardBody, Col, Container, Row, Image, FormCheck, Button, Badge, ProgressBar } from 'react-bootstrap';
 import './styles.scss'
 import { Dash, Plus, Trash } from 'react-bootstrap-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { ENDPOINTS } from '../apiUtils';
+import { ENDPOINTS, REQUEST_TYPES } from '../apiUtils';
 
 const Cart = () => {
 
     const navigate = useNavigate();
-    const { makeRequest, responseData } = useApi(ENDPOINTS.CART.GET_CART);
-    const { makeRequest: clearCartApi } = useApi(ENDPOINTS.CART.CLEAR_CART);
+    const { makeRequest: getCartData, responseData } = useApi(ENDPOINTS.CART.GET_CART);
+    const { makeRequest: clearCartApi, responseData: clearCartResponse } =
+        useApi(ENDPOINTS.CART.CLEAR_CART, REQUEST_TYPES.DELETE);
+    const { makeRequest: checkout, responseData: checkoutSession } = useApi(ENDPOINTS.CART.CHECKOUT, REQUEST_TYPES.POST);
+    console.log("🚀 ~ Cart ~ clearCartResponse:", clearCartResponse)
+
+    const onCheckout = () => {
+        checkout(null, { updateUser: false });
+    }
+
+    useEffect(() => {
+        if (checkoutSession?.url) {
+            // load an external URL;
+            window.location.href = checkoutSession?.url
+        }
+    }, [checkoutSession]);
+
 
 
     useEffect(() => {
-        makeRequest(null, false);
+        const intervalID = setInterval(() => getCartData(null, { updateUser: false }), 5000);
+
+        getCartData(null, { updateUser: false });
+        return () => {
+            clearInterval(intervalID);
+        }
     }, []);
 
-    const { totalPrice, totalQuantity } = responseData || {}
+    const { totalPrice, totalQuantity } = clearCartResponse || responseData || {}
 
     const clearCart = () => {
-        clearCartApi();
+        clearCartApi(null, { updateUser: false });
     }
 
 
@@ -35,7 +55,7 @@ const Cart = () => {
                             <hr />
 
                             {/* repeat this for multiple products */}
-                            {responseData?.items?.map(({
+                            {(clearCartResponse || responseData)?.items?.map(({
                                 id,
                                 title,
                                 price,
@@ -105,7 +125,7 @@ const Cart = () => {
 
                                 <h5>Subtotal ({totalQuantity}):  ${totalPrice?.toLocaleString('en-IN')}</h5>
                                 <FormCheck className='mt-3' label='This order contains a gift' />
-                                <Button variant='warning my-2' className='rounded-border w-100'>Proceed to Buy</Button>
+                                <Button onClick={onCheckout} variant='warning my-2' className='rounded-border w-100'>Proceed to Buy</Button>
                                 <Button onClick={clearCart} variant='danger' className='rounded-border w-100'>Clear Cart</Button>
                             </section>
 

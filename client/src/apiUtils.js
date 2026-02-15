@@ -19,6 +19,7 @@ export const ENDPOINTS = {
     DECREMENT: "/cart/decrement",
     CLEAR_CART: "/cart/clear-cart",
     GET_CART: "/cart/get-cart",
+    CHECKOUT: "/order/create-checkout-session",
   },
 };
 

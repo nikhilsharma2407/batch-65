@@ -35,7 +35,7 @@ const useApi = (url, type = REQUEST_TYPES.GET) => {
     } catch (error) {
       console.log("🚀 ~ makeRequest ~ error:", error);
       setSuccess(false);
-      setMessage(error.response.data.message);
+      setMessage(error.response?.data?.message);
     } finally {
       setIsLoading(false);
     }
